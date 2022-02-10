@@ -1,0 +1,42 @@
+@import "fonts";
+@import "colors";
+@import "functions";
+@import "breakpoints";
+@import "mixins";
+
+html {
+  background-color: $dark;
+
+}
+* {
+  direction: rtl;
+  font-family: iranYekan;
+}
+a{
+  text-decoration: none;
+  color: $white;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    margin: 0;
+  }
+}
+input {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

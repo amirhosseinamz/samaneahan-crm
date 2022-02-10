@@ -1,0 +1,68 @@
+@mixin display-flex() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+}
+
+// Breakpoints
+
+// Extra Extra Extra small devices
+
+@mixin xxxs {
+  @media (max-width: #{$screen-xxxs-max}) {
+    @content;
+  }
+}
+// Extra Extra small devices
+
+@mixin xxs {
+  @media (max-width: #{$screen-xxs-max}) {
+    @content;
+  }
+}
+
+// Extra small devices
+
+@mixin xs {
+  @media (max-width: #{$screen-xs-max}) {
+    @content;
+  }
+}
+
+// Small devices
+
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+// Medium devices
+
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+// Large devices
+
+@mixin lg {
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+// Extra Large devices
+
+@mixin xl {
+  @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}
+
+//Optional device size
+@mixin rwd($screen) {
+  @media (min-width: $screen+'px') {
+    @content;
+  }
+}
