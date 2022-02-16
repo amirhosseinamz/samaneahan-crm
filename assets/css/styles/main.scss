@@ -1,12 +1,11 @@
+@import "mixins";
 @import "fonts";
 @import "colors";
 @import "functions";
 @import "breakpoints";
-@import "mixins";
 
 html {
   background-color: $dark;
-
 }
 * {
   direction: rtl;

@@ -49,11 +49,11 @@ export default {
         return;
       }
         await this.$store.dispatch('authentication/authentication/adminLogin', {
-          userName: this.userName,
+          username: this.userName,
           password: this.password,
         });
     }
-  }
+  },
 }
 </script>
 

@@ -47,7 +47,12 @@ import BaseButton from '~/components/UI/BaseButton'
 
 export default {
   name: 'index',
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  },
   components: { BaseButton, datePicker, BaseDropdown, BaseInput},
+
   data() {
     return {
       userName: null,
@@ -79,6 +84,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .form-container {
   width: 80%;
 
@@ -91,6 +98,9 @@ export default {
     grid-row-gap: toRem(40);
     padding: 0 toRem(50);
     margin-top: toRem(50);
+    @include xl {
+      padding: toRem(25);
+    }
     select, .dropdown {
       background-color: $dark-2;
       border-radius: toRem(25);

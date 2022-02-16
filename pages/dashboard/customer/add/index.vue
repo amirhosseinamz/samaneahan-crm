@@ -20,6 +20,10 @@ import BaseInput from '~/components/UI/BaseInput'
 import BaseButton from '~/components/UI/BaseButton'
 export default {
   components: { BaseButton, BaseInput },
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  },
   data() {
     return {
       customerName: null,
@@ -31,6 +35,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .form-container {
   width: 80%;
 
@@ -43,6 +49,9 @@ export default {
     grid-row-gap: toRem(40);
     padding: 0 toRem(50);
     margin-top: toRem(50);
+    @include xl {
+      padding: toRem(25);
+    }
     .customer-name {
       grid-column: 1/2;
       grid-row: 1/2;

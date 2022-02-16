@@ -3,9 +3,8 @@
     <form>
       <base-dropdown class="category" :list="categoryData" place-holder="نام دسته بندی"></base-dropdown>
       <base-input v-model="answer" class="answer" place-holder="پاسخ"></base-input>
-
       <div class="register-setting">
-        <base-button class="register-setting_btn" mode="primary">
+        <base-button class="register-setting_btn primary">
           ذخیره
         </base-button>
       </div>
@@ -21,6 +20,10 @@ import BaseInput from '~/components/UI/BaseInput'
 
 export default {
   name: 'index',
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  },
   components: {
     BaseInput,
     BaseButton,
@@ -36,6 +39,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .form-container {
   width: 80%;
 
@@ -48,6 +53,9 @@ export default {
     grid-row-gap: toRem(40);
     padding: 0 toRem(50);
     margin-top: toRem(50);
+    @include xl {
+      padding: toRem(25);
+    }
 
     .category {
       grid-row: 1/2;

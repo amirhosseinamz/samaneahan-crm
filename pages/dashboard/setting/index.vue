@@ -25,6 +25,10 @@ import BaseButton from '~/components/UI/BaseButton'
 
 export default {
   name: 'index',
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  },
   components: {
     BaseButton,
     BaseTable
@@ -33,6 +37,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .setting-container {
   .add-new {
     width: 100%;

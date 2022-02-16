@@ -31,6 +31,10 @@ export default {
   width: toRem(54);
   height: toRem(29);
   border-radius: toRem(40);
+  @include sm {
+    width: toRem(40);
+    height: toRem(20);
+  }
 
   input {
     opacity: 0;
@@ -45,6 +49,11 @@ export default {
         -webkit-transform: translateX(toRem(-23));
         -ms-transform: translateX(toRem(-23));
         transform: translateX(toRem(-23));
+        @include sm {
+          -webkit-transform: translateX(toRem(-18));
+          -ms-transform: translateX(toRem(-18));
+          transform: translateX(toRem(-18));
+        }
       }
     }
   }
@@ -69,6 +78,10 @@ export default {
       background-color: $white;
       -webkit-transition: .4s;
       transition: .4s;
+      @include sm {
+        height: toRem(16);
+        width: toRem(18);
+      }
     }
 
     &.round {

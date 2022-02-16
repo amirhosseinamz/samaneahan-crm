@@ -21,14 +21,6 @@
           <span>کارمند</span>
           <input type="checkbox" id="developer" value="developer" v-model="isEmployee">
         </div>
-<!--        <div class="checkbox-field">-->
-<!--          <span>فروشنده</span>-->
-<!--          <input type="checkbox" id="seller" name="checkboxes" value="seller" v-model="is">-->
-<!--        </div>-->
-<!--        <div class="checkbox-field">-->
-<!--          <span>پشتیبان</span>-->
-<!--          <input type="checkbox" id="support" name="checkboxes" value="support" v-model="checkboxes">-->
-<!--        </div>-->
         <div class="checkbox-field">
           <span>فنی</span>
           <input type="checkbox" id="tech" name="checkboxes" value="tech" v-model="isDeveloper">
@@ -105,10 +97,16 @@ export default {
       },
     }
   },
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  }
 }
 </script>
 
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .form-container {
   width: 80%;
 
@@ -121,6 +119,9 @@ export default {
     grid-row-gap: toRem(40);
     padding: 0 toRem(50);
     margin-top: toRem(50);
+    @include xl {
+      padding: toRem(25);
+    }
 
     .user-name {
       grid-column: 1/2;

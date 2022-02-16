@@ -50,6 +50,10 @@ import datePicker from "@alireza-ab/vue-persian-datepicker";
 
 export default {
   name: 'index',
+  transition: {
+    name: 'paging',
+    mode: 'out-in'
+  },
   components: { BaseToggle, BaseButton, BaseDropdown, BaseInput, datePicker },
   data() {
     return {
@@ -98,13 +102,20 @@ export default {
     reportData(val) {
       console.log(val)
     }
-  }
+  },
+
 }
 </script>
 
 <style scoped lang="scss">
+.paging-enter-active, .paging-leave-active { transition: all .4s; }
+.paging-enter, .paging-leave-active { opacity: 0; transform: translateY(-50px) }
 .form-container {
   width: 80%;
+  @include lg {
+    width: calc(100% - toRem(80));
+    margin-right: auto;
+  }
 
   form::v-deep {
     width: 100%;
@@ -115,6 +126,18 @@ export default {
     grid-row-gap: toRem(50);
     padding: 0 toRem(50);
     margin-top: toRem(50);
+    @include xl {
+      padding: toRem(25);
+    }
+    @include md {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(6, 1fr);
+    }
+    @include sm {
+      grid-column-gap: toRem(20);
+      grid-row-gap: toRem(25);
+      padding: 0 toRem(20);
+    }
     .customer-name {
       grid-column: 1/2;
       grid-row: 1/2;
@@ -126,6 +149,10 @@ export default {
     .tel-number {
       grid-column: 3/4;
       grid-row: 1/2;
+      @include md {
+        grid-column: 1/2;
+        grid-row: 2/3;
+      }
     }
     .video-sent {
       grid-column: 1/2;
@@ -136,10 +163,17 @@ export default {
       border-radius: toRem(25);
       background: $dark-2;
       padding: toRem(18);
+      @include md {
+        grid-column: 2/3;
+        grid-row: 2/3;
+      }
 
       span {
         font-size: toRem(16);
         color: $white;
+        @include lg {
+          font-size: toRem(14);
+        }
       }
       input {
         width: toRem(20);
@@ -156,9 +190,16 @@ export default {
       border-radius: toRem(25);
       background: $dark-2;
       padding: toRem(18);
+      @include md {
+        grid-column: 1/2;
+        grid-row: 3/4;
+      }
       span {
         font-size: toRem(16);
         color: $white;
+        @include lg {
+          font-size: toRem(14);
+        }
       }
       input {
         width: toRem(20);
@@ -169,7 +210,7 @@ export default {
     .call-feedback,
     .final-call-feedback{
       width: 100%;
-      height: 100%;
+      height: toRem(60);
       background-color: $dark-2;
       border-radius: toRem(25);
       @extend .align-center;
@@ -183,15 +224,27 @@ export default {
     .call-feedback {
       grid-column: 3/4;
       grid-row: 2/3;
+      @include md {
+        grid-column: 2/3;
+        grid-row: 3/4;
+      }
     }
     .final-call-feedback {
       grid-column: 3/4;
       grid-row: 4/5;
+      @include md {
+        grid-column: 1/2;
+        grid-row: 4/5;
+      }
     }
     .call-date {
       grid-column: 3/4;
       grid-row: 3/4;
-      height: toRem(70);
+      height: toRem(60);
+      @include md {
+        grid-column: 2/3;
+        grid-row: 4/5;
+      }
       .pdp {
         height: 100%;
         color: $white;
@@ -229,11 +282,15 @@ export default {
       grid-column: 1/3;
       grid-row: 3/5;
       height: 100%;
+      @include md {
+        grid-column: 1/3;
+        grid-row: 5/6;
+      }
     }
 
     .register-report {
-      grid-row: 5/6;
-      grid-column: 1/4;
+      grid-column: 1/3;
+      grid-row: 6/7;
       @extend .justify-center;
       .btn {
         max-width: toRem(400);

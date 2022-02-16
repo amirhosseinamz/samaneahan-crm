@@ -67,36 +67,16 @@ const actions = {
 
   },
   async adminLogin(context, payload) {
-    const URL = `${ process.env.BASE_URL }/api/admin/login`
-    debugger
-    this.$axios.get('/sanctum/csrf-cookie').then(response => {
       // Login...
       //console.log(response);
       //console.log('cookie', document.cookie)
-      this.$axios.post('/api/admin/login', payload).then(res => {
+      this.$axios.post('/api/login', payload).then(res => {
         console.log(res);
+        if (res.status === 200 && res.data.data) {
+          localStorage.setItem('adminToken', res.data.data);
+          this.$router.push('/dashboard');
+        }
       })
-    });
-    //console.log(JSON.stringify(payload))
-    // const response = await fetch(URL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(payload)
-    //  })
-    // const responseData = await response.json();
-    // console.log(responseData);
-    // if (responseData.data) {
-    //   // localStorage.setItem('userToken', responseData.data);
-    //   // await this.$router.replace('/dashboard');
-    // } else {
-    //
-    // }
-    // if (!response.ok) {
-    //   throw new Error(responseData.message || 'عملیات با موفقیت انجام نشد')
-    // }
-
   },
 
 }

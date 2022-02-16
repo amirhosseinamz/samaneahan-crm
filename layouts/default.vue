@@ -20,12 +20,16 @@ export default {
 }
 .layout-wrapper {
   @extend .d-flex;
+  position: relative;
   .sidebar-wrapper {
     height: 100vh;
-    width: 20%;
   }
   .application {
     width: 80%;
+    @include lg {
+      width: calc(100% - toRem(80));
+      margin-right: auto;
+    }
   }
 }
 

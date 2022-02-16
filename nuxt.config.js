@@ -9,7 +9,8 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' },
     ]
   },
   ssr: false,
@@ -49,8 +50,11 @@ export default {
     Credential: true,
     baseURL: "http://crm.samaneahan.ir",
     withCredentials: true,
-    // xsrfHeaderName: true,
-    // xsrfCookieName: true
+    headers: {
+      // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      'X-Requested-With': 'XMLHttpRequest',
+      // 'X-CSRF-TOKEN' : head.meta.find(item => item.name === "csrf-token").content
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
