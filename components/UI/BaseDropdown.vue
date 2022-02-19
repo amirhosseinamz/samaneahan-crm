@@ -7,7 +7,7 @@
       <div class="arrow" :class="{ expanded : visible }"></div>
       <div :class="{ hidden : !visible, visible }">
         <ul>
-          <li :class="{ current : item === value }" v-for="item in list" @click="select(item)">{{ item }}</li>
+          <li :class="{ current : item === value }" v-for="item in list" @click="select(item.name, item.value)">{{ item.name }}</li>
         </ul>
       </div>
     </div>
@@ -36,14 +36,14 @@ export default {
     toggle () {
         this.visible = !this.visible
     },
-    select (option) {
-      this.value = option
+    select (name,value) {
+      this.value = { name, value }
     }
   },
   computed: {
     shownVal() {
       if (this.value) {
-        return this.value;
+        return this.value.name;
       } else {
         return this.placeHolder;
       }

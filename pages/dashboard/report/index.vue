@@ -26,13 +26,17 @@
           نام کارشناس
         </td>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
+      <tr v-for="report in reportsData">
         <td></td>
         <td></td>
         <td>
-
+          {{ report.created_at }}
+        </td>
+        <td>
+          {{ report.customer.name }}
+        </td>
+        <td>
+          {{ report.customer.mobile }}
         </td>
         <td>
 
@@ -52,6 +56,14 @@ export default {
     name: 'paging',
     mode: 'out-in'
   },
+  computed: {
+    reportsData() {
+      return this.$store.getters['report/report/reportsData'];
+    }
+  },
+  async asyncData({ store }) {
+    await store.dispatch('report/report/getReports');
+  }
 }
 </script>
 

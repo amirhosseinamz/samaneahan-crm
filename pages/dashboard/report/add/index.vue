@@ -20,13 +20,13 @@
         <base-toggle :val="catalog" v-model="catalog"></base-toggle>
       </div>
       <div class="call-feedback">
-        <base-dropdown @valueHandler="callFeedbackValHandler" class="dropdown" :list="callFeedbackList" place-holder="بازخورد تماس"></base-dropdown>
+        <base-dropdown @valueHandler="callFeedbackValHandler" class="dropdown" :list="feedbackAnswers" place-holder="بازخورد تماس"></base-dropdown>
       </div>
       <div class="call-date">
         <date-picker placeholder="تاریخ تماس پیشنهادی" :column="1" mode="single" v-model="callDate" clearable></date-picker>
       </div>
       <div class="final-call-feedback">
-        <base-dropdown @valueHandler="finalCallFeedbackValHandler" class="dropdown" :list="finalCallFeedbackList" place-holder="بازخورد نهایی تماس"></base-dropdown>
+        <base-dropdown @valueHandler="finalCallFeedbackValHandler" class="dropdown" :list="finalAnswers" place-holder="بازخورد نهایی تماس"></base-dropdown>
       </div>
       <base-input v-model="analysis" :text-field="true" class="analysis" place-holder="تحلیل کارشناس"></base-input>
 
@@ -72,10 +72,10 @@ export default {
   },
   methods: {
     callFeedbackValHandler(val) {
-      this.callFeedback = val;
+      this.callFeedback = val.name;
     },
     finalCallFeedbackValHandler(val) {
-      this.callFeedback = val;
+      this.finalCallFeedback = val.name;
     },
     async submitForm() {
       await this.$store.dispatch('report/report/sendReport', this.reportData);
@@ -85,24 +85,28 @@ export default {
   computed: {
     reportData() {
       let reportData = {
-        customerName: this.customerName,
-        customerMobile: this.customerPhone,
-        customerPhone: this.telNumber,
-        filmSend: this.video,
-        catalogSend: this.catalog,
-        callFeedback: this.callFeedback,
-        finalCallFeedback: this.finalCallFeedback,
-        suggestCallDate: this.callDate,
-        employeeFeedback: this.analysis,
+        customer_name: this.customerName,
+        customer_mobile: this.customerPhone,
+        customer_phone: this.telNumber,
+        film_send: this.video,
+        catalog_send: this.catalog,
+        call_feedback: this.callFeedback,
+        final_feedback: this.finalCallFeedback,
+        suggest_call_date: this.callDate,
+        employee_feedback: this.analysis,
       }
       return reportData;
+    },
+    finalAnswers() {
+      return this.$store.getters['report/report/finalAnswers'];
+    },
+    feedbackAnswers() {
+      return this.$store.getters['report/report/feedbackAnswers'];
     }
   },
-  watch: {
-    reportData(val) {
-      console.log(val)
-    }
-  },
+  async asyncData({ store }) {
+    await store.dispatch('report/report/getFeedbacks');
+  }
 
 }
 </script>

@@ -20,7 +20,7 @@
           ادمین
         </td>
         <td>
-          فروشنده
+          کارمند
         </td>
         <td>
           فنی
@@ -29,13 +29,25 @@
           مشاهده
         </td>
       </tr>
-      <tr>
-        <td>امیرحسین</td>
-        <td>آموزگار</td>
-        <td>1380</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+      <tr v-for="item in employeesData">
+        <td>
+          {{  item.name  }}
+        </td>
+        <td>
+          {{ item.profile ? item.profile.last_name : "ویرایش شود" }}
+        </td>
+        <td>
+          {{ item.profile ? item.profile.birth_date : "ویرایش شود" }}
+        </td>
+        <td>
+          {{  item.is_admin  }}
+        </td>
+        <td>
+          {{  item.is_employee }}
+        </td>
+        <td>
+          {{  item.is_developer }}
+        </td>
         <td>
           <base-button classes="view-btn" mode="secondary">
             مشاهده
@@ -60,6 +72,14 @@ export default {
     return {
 
     }
+  },
+  computed: {
+    employeesData() {
+      return this.$store.getters['employees/employees/employeesData'];
+    }
+  },
+  async asyncData({ store }) {
+   await store.dispatch('employees/employees/getEmployees');
   }
 }
 </script>

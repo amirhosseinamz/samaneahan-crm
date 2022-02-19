@@ -75,16 +75,16 @@ export default {
   computed: {
     employeesData() {
       let data = {
-        userName: this.userName,
+        username: this.userName,
         password: this.password,
-        firstName: this.userFirstName,
-        lastName: this.userLastName,
+        first_name: this.userFirstName,
+        last_name: this.userLastName,
         mobile: this.mobile,
-        birthDate: this.birthDate,
-        educationRate: this.userEducation,
-        isAdmin: this.isAdmin,
-        isDeveloper: this.isDeveloper,
-        isEmployee: this.isEmployee
+        birth_date: this.birthDate,
+        education_rate: this.userEducation,
+        is_admin: this.isAdmin,
+        is_developer: this.isDeveloper,
+        is_employee: this.isEmployee
       }
       return data;
     }

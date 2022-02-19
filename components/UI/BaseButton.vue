@@ -34,10 +34,6 @@ export default {
       type: String,
       require: false,
       default: 'primary',
-      validator: value => [
-        'primary',
-        'gray'
-      ].includes(value.toLowerCase())
     },
     classes: {
       type: String,
