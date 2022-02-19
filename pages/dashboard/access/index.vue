@@ -5,6 +5,7 @@
 <script>
 export default {
   name: 'index',
+  middleware: 'authentication',
   transition: {
     mode: 'out-in',
     name: 'paging'

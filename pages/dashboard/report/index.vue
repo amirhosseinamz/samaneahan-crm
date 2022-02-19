@@ -39,7 +39,7 @@
           {{ report.customer.mobile }}
         </td>
         <td>
-
+          {{ report.admin.name }}
         </td>
       </tr>
     </base-table>
@@ -52,6 +52,7 @@ import BaseTable from '~/components/UI/BaseTable'
 export default {
   name: 'index',
   components: { BaseTable, BaseButton },
+  middleware: 'authentication',
   transition: {
     name: 'paging',
     mode: 'out-in'

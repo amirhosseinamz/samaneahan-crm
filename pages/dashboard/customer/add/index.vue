@@ -20,6 +20,7 @@ import BaseInput from '~/components/UI/BaseInput'
 import BaseButton from '~/components/UI/BaseButton'
 export default {
   components: { BaseButton, BaseInput },
+  middleware: 'authentication',
   transition: {
     name: 'paging',
     mode: 'out-in'

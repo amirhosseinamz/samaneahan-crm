@@ -31,6 +31,7 @@ import BaseButton from '~/components/UI/BaseButton'
 
 export default {
   name: 'index',
+  middleware: 'isAuthenticated',
   layout: 'NoSidebar',
   components: {
     BaseButton

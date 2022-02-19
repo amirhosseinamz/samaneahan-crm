@@ -50,6 +50,7 @@ import datePicker from "@alireza-ab/vue-persian-datepicker";
 
 export default {
   name: 'index',
+  middleware: 'authentication',
   transition: {
     name: 'paging',
     mode: 'out-in'

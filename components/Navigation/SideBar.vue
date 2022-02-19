@@ -16,6 +16,15 @@
           </li>
         </ul>
       </section>
+      <div v-if="userName" class="user-name">
+        <div class="logout" v-if="logoutIsShown" @click="logout">
+          خروج از حساب
+        </div>
+        <div class="txt" @click="showLogout">
+          {{ userName }}
+        </div>
+
+      </div>
     </div>
     <div v-if="!isOpen" class="mobile-content close">
       <div class="collapse-icon">
@@ -23,7 +32,8 @@
       </div>
       <section class="body">
         <ul class="tools-list">
-          <li class="tools-list_item" ref="listItem" v-for="(item, index) in listData" :key="item.id" @click="selectItem(index)"
+          <li class="tools-list_item" ref="listItem" v-for="(item, index) in listData" :key="item.id"
+              @click="selectItem(index)"
           >
             <i :class="item.icons"></i>
           </li>
@@ -55,7 +65,7 @@
 <script>
 export default {
   name: 'SideBar',
-  data () {
+  data() {
     return {
       listData: [
         {
@@ -107,10 +117,13 @@ export default {
         },
       ],
       isOpen: false,
+      logoutIsShown: false,
     }
   },
-  mounted () {
-    let routeName = this.$route.name.split('-')[1]
+  async mounted() {
+    await this.$store.dispatch('authentication/authentication/getUser');
+
+    let routeName = this.$route.name.split('-')[1];
     for (let i = 0; i < this.listData.length; i++) {
       if (this.listData[i].link.split('/')[2] === routeName) {
         this.deleteSelectedItem();
@@ -119,7 +132,7 @@ export default {
     }
   },
   methods: {
-    selectItem (index) {
+    selectItem(index) {
       this.deleteSelectedItem();
       this.listData[index].selected = true;
       this.isOpen = false;
@@ -134,8 +147,20 @@ export default {
     },
     backdropClick() {
       this.isOpen = false;
+    },
+    showLogout() {
+      this.logoutIsShown = !this.logoutIsShown;
+    },
+    logout() {
+      this.$store.dispatch('authentication/authentication/logout');
     }
-  }
+  },
+  computed: {
+    userName() {
+      return this.$store.getters["authentication/authentication/userName"];
+    }
+  },
+
 }
 </script>
 
@@ -149,9 +174,46 @@ export default {
   z-index: -1;
   pointer-events: auto;
 }
+
 .sidebar-container {
   color: $white;
   height: 100%;
+
+  .user-name {
+    padding-right: toRem(30);
+    position: absolute;
+    bottom: toRem(30);
+    color: $yellow;
+    .txt {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .logout {
+      padding: toRem(15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: toRem(15);
+      position: relative;
+      bottom: toRem(15);
+      background-color: $dark-3;
+      cursor: pointer;
+      &:before {
+        content: " ";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: toRem(20) toRem(20) 0 toRem(20);
+        border-color: $dark-3 transparent transparent transparent;
+        position: absolute;
+        bottom: toRem(-14);
+        right: toRem(59);
+      }
+    }
+
+  }
 
   .desktop-content {
     width: 20%;
@@ -159,6 +221,7 @@ export default {
     min-width: toRem(260);
     background-color: $dark-2;
     height: 100vh;
+
     .title {
       padding: 0 toRem(40);
     }
@@ -177,10 +240,12 @@ export default {
           font-size: toRem(16);
           border-radius: toRem(15);
           cursor: pointer;
+
           i {
             color: $white;
             font-size: toRem(20);
           }
+
           a {
             width: 100%;
             height: 100%;
@@ -191,9 +256,11 @@ export default {
           &.active {
             background: $yellow;
             padding-right: toRem(15);
+
             i {
               color: $dark;
             }
+
             a {
               color: $dark;
             }
@@ -202,9 +269,11 @@ export default {
       }
     }
   }
+
   .mobile-content {
     display: none;
   }
+
   @include lg {
     position: absolute;
     z-index: 20;
@@ -217,6 +286,7 @@ export default {
     .mobile-content {
       transition: all 0.1s ease-out;
       height: 100vh;
+
       &.close {
         min-width: unset;
         padding: toRem(50) 0;
@@ -226,15 +296,19 @@ export default {
         align-items: center;
         background-color: $dark-2;
         flex-direction: column;
+
         .collapse-menu {
           font-size: toRem(35);
         }
+
         .body {
           .tools-list {
             margin-top: toRem(60);
+
             &_item {
               width: 100%;
               margin-top: toRem(20);
+
               i {
                 font-size: toRem(22);
               }
@@ -242,14 +316,16 @@ export default {
           }
         }
       }
+
       &.open {
         display: block;
         width: toRem(300);
         background-color: $dark-2;
         padding: toRem(50) 0;
         height: 100%;
+
         .backdrop {
-          background-color: rgba(255,255,255,0.05);
+          background-color: rgba(255, 255, 255, 0.05);
           backdrop-filter: blur(3px);
           position: fixed;
           top: 0;
@@ -259,6 +335,7 @@ export default {
           z-index: -1;
           pointer-events: auto;
         }
+
         .title {
           padding: 0 toRem(40);
         }
@@ -278,10 +355,12 @@ export default {
               font-size: toRem(16);
               border-radius: toRem(15);
               cursor: pointer;
+
               i {
                 color: $white;
                 font-size: toRem(20);
               }
+
               a {
                 width: 100%;
                 height: 100%;
@@ -292,9 +371,11 @@ export default {
               &.active {
                 background: $yellow;
                 padding-right: toRem(15);
+
                 i {
                   color: $dark;
                 }
+
                 a {
                   color: $dark;
                 }

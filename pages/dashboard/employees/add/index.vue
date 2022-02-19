@@ -3,9 +3,9 @@
     <form>
       <base-input v-model="userName" class="user-name" place-holder="نام کاربری"></base-input>
       <base-input v-model="password" class="password" place-holder="رمز عبور"></base-input>
-      <base-input v-model="mobile" class="mobile" place-holder="شماره موبایل" type="number"></base-input>
       <base-input v-model="userFirstName" class="user-first-name" place-holder="نام"></base-input>
       <base-input v-model="userLastName" class="user-last-name" place-holder="نام خانوادگی"></base-input>
+      <base-input v-model="mobile" class="mobile" place-holder="شماره موبایل" type="number"></base-input>
       <div class="birth-date">
         <date-picker placeholder="تاریخ تولد" :column="1" mode="single" v-model="birthDate" clearable></date-picker>
       </div>
@@ -44,6 +44,7 @@ import BaseButton from '~/components/UI/BaseButton'
 
 export default {
   name: 'index',
+  middleware: 'authentication',
   components: { BaseButton, datePicker, BaseDropdown, BaseInput},
   data() {
     return {
@@ -55,9 +56,16 @@ export default {
       userEducation: "",
       mobile: null,
       dropdownList: [
-        "دیپلم",
-        "لیسانس",
-        "فوق لیسانس",
+        {
+          name: "دیپلم",
+          value: "دیپلم",
+        },{
+          name: "لیسانس",
+          value: "لیسانس",
+        },{
+          name: "فوق لیسانس",
+          value: "فوق لیسانس",
+        },
       ],
       isAdmin: false,
       isDeveloper: false,
@@ -81,7 +89,7 @@ export default {
         last_name: this.userLastName,
         mobile: this.mobile,
         birth_date: this.birthDate,
-        education_rate: this.userEducation,
+        education_rate: this.userEducation.value,
         is_admin: this.isAdmin,
         is_developer: this.isDeveloper,
         is_employee: this.isEmployee

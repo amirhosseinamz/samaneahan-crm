@@ -1,3 +1,3 @@
 export default function (context) {
-  context.redirect('/dashboard');
+  context.redirect('/dashboard/report');
 }

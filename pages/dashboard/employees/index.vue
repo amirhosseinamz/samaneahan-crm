@@ -63,6 +63,7 @@ import BaseButton from '~/components/UI/BaseButton';
 import BaseTable from '~/components/UI/BaseTable'
 export default {
   name: 'index',
+  middleware: 'authentication',
   transition: {
     name: 'paging',
     mode: 'out-in'

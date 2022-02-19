@@ -19,7 +19,7 @@ const actions = {
         Authorization: 'Bearer ' + localStorage.getItem('adminToken'),
       }
     }
-    this.$axios.get('/api/admin', config).then(res => {
+    this.$axios.get('/api/employees', config).then(res => {
       if (res.status === 200 && res.data) {
         context.commit('setEmployees', res.data.data);
       }

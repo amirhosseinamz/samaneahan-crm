@@ -25,6 +25,7 @@ import BaseButton from '~/components/UI/BaseButton'
 
 export default {
   name: 'index',
+  middleware: 'authentication',
   transition: {
     name: 'paging',
     mode: 'out-in'
